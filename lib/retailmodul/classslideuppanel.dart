@@ -221,6 +221,8 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                         widget.outletinfo.outletname!,
                                         widget.outletinfo);
                                   } else {
+                                    print(
+                                        'ini data class printer${widget.listdata}');
                                     await Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -280,121 +282,126 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
           ),
-       widget.datatransaksi.isNotEmpty?   Container(
-            height: MediaQuery.of(context).size.height * 0.05,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.datatransaksi.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(7.0),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: selectedindex != index
-                              ? Color.fromARGB(255, 0, 147, 167)
-                              : Colors.pink, // foreground
-                        ),
-                        onPressed: () async {
-                          selectedindex = index;
-                          print(index == index);
-                          Fluttertoast.showToast(
-                              msg: "Sukses Change",
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Color.fromARGB(255, 11, 12, 14),
-                              textColor: Colors.white,
-                              fontSize: 16.0);
-                          for (var element in datadetail) {
-                            var amountprice = element.pricelist!
-                                .where((element) =>
-                                    element.transtype ==
-                                    widget.datatransaksi[index].transtype)
-                                .toList();
-                            var result = IafjrndtClass(
-                                ratecostamt: element.ratecostamt,
-                                salestype:
-                                    widget.datatransaksi[index].transdesc,
-                                condimenttype: element.condimenttype,
-                                svchgpct: element.svchgpct,
-                                multiprice: element.multiprice,
-                                pricelist: element.pricelist,
-                                typ: element.typ,
-                                optioncode: element.optioncode,
-                                havecond: element.havecond,
-                                active: element.active,
-                                trdt: element.trdt,
-                                transno: element.transno,
-                                split: element.split,
-                                itemdesc: element.itemdesc,
-                                qty: element.qty,
-                                description: element.description,
-                                createdt: element.createdt,
-                                rateamtitem: amountprice.isNotEmpty
-                                    ? amountprice.first.amount
-                                    : element.rateamtitem,
-                                discamt: element.discamt,
-                                discpct: element.discpct,
-                                taxpct: element.taxpct,
-                                revenueamt: amountprice.isNotEmpty
-                                    ? element.qty! * amountprice.first.amount -
-                                        element.discamt!
-                                    : element.revenueamt,
-                                taxamt: amountprice.isNotEmpty
-                                    ? (element.qty! *
-                                            amountprice.first.amount) *
-                                        element.taxpct! /
-                                        100
-                                    : element.taxamt,
-                                serviceamt: amountprice.isNotEmpty
-                                    ? (element.qty! *
-                                            amountprice.first.amount) *
-                                        element.svchgpct! /
-                                        100
-                                    : element.serviceamt,
-                                totalaftdisc: amountprice.isNotEmpty
-                                    ? (element.qty! *
-                                            amountprice.first.amount) +
-                                        ((element.qty! *
-                                                amountprice.first.amount) *
-                                            element.taxpct! /
-                                            100) +
-                                        ((element.qty! *
-                                                amountprice.first.amount) *
-                                            element.svchgpct! /
-                                            100) -
-                                        element.discamt!
-                                    : element.totalaftdisc,
-                                id: element.id,
-                                totalcost: 0);
+          widget.datatransaksi.isNotEmpty
+              ? Container(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.datatransaksi.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(7.0),
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: selectedindex != index
+                                    ? Color.fromARGB(255, 0, 147, 167)
+                                    : Colors.pink, // foreground
+                              ),
+                              onPressed: () async {
+                                selectedindex = index;
+                                print(index == index);
+                                Fluttertoast.showToast(
+                                    msg: "Sukses Change",
+                                    toastLength: Toast.LENGTH_LONG,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor:
+                                        Color.fromARGB(255, 11, 12, 14),
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
+                                for (var element in datadetail) {
+                                  var amountprice = element.pricelist!
+                                      .where((element) =>
+                                          element.transtype ==
+                                          widget.datatransaksi[index].transtype)
+                                      .toList();
+                                  var result = IafjrndtClass(
+                                      ratecostamt: element.ratecostamt,
+                                      salestype:
+                                          widget.datatransaksi[index].transdesc,
+                                      condimenttype: element.condimenttype,
+                                      svchgpct: element.svchgpct,
+                                      multiprice: element.multiprice,
+                                      pricelist: element.pricelist,
+                                      typ: element.typ,
+                                      optioncode: element.optioncode,
+                                      havecond: element.havecond,
+                                      active: element.active,
+                                      trdt: element.trdt,
+                                      transno: element.transno,
+                                      split: element.split,
+                                      itemdesc: element.itemdesc,
+                                      qty: element.qty,
+                                      description: element.description,
+                                      createdt: element.createdt,
+                                      rateamtitem: amountprice.isNotEmpty
+                                          ? amountprice.first.amount
+                                          : element.rateamtitem,
+                                      discamt: element.discamt,
+                                      discpct: element.discpct,
+                                      taxpct: element.taxpct,
+                                      revenueamt: amountprice.isNotEmpty
+                                          ? element.qty! * amountprice.first.amount -
+                                              element.discamt!
+                                          : element.revenueamt,
+                                      taxamt: amountprice.isNotEmpty
+                                          ? (element.qty! *
+                                                  amountprice.first.amount) *
+                                              element.taxpct! /
+                                              100
+                                          : element.taxamt,
+                                      serviceamt: amountprice.isNotEmpty
+                                          ? (element.qty! *
+                                                  amountprice.first.amount) *
+                                              element.svchgpct! /
+                                              100
+                                          : element.serviceamt,
+                                      totalaftdisc: amountprice.isNotEmpty
+                                          ? (element.qty! *
+                                                  amountprice.first.amount) +
+                                              ((element.qty! *
+                                                      amountprice
+                                                          .first.amount) *
+                                                  element.taxpct! /
+                                                  100) +
+                                              ((element.qty! *
+                                                      amountprice.first.amount) *
+                                                  element.svchgpct! /
+                                                  100) -
+                                              element.discamt!
+                                          : element.totalaftdisc,
+                                      id: element.id,
+                                      totalcost: 0);
 
-                            ClassApi.updatePosDetail(result, pscd);
-                          }
-                          await getDetailTrnos().then((value) {
-                            setState(() {});
-                          });
-                          await getSumm();
-                          widget.updatedata!();
-                          widget.refreshdata;
+                                  ClassApi.updatePosDetail(result, pscd);
+                                }
+                                await getDetailTrnos().then((value) {
+                                  setState(() {});
+                                });
+                                await getSumm();
+                                widget.updatedata!();
+                                widget.refreshdata;
 
-                          ClassRetailMainMobile.of(context)!.string =
-                              IafjrndtClass(
-                                  trdt: widget.trnoinfo!.trdt,
-                                  pscd: widget.trnoinfo!.pscd,
-                                  description: '',
-                                  totalaftdisc: 0,
-                                  transno: datadetail.length == 0
-                                      ? null
-                                      : widget.trnoinfo!.transno,
-                                  totalcost: 0,
-                                  ratecostamt: 0);
-                          setState(() {});
-                        },
-                        child: Text(widget.datatransaksi[index].transdesc!)),
-                  );
-                }),
-          ):Container(),
+                                ClassRetailMainMobile.of(context)!.string =
+                                    IafjrndtClass(
+                                        trdt: widget.trnoinfo!.trdt,
+                                        pscd: widget.trnoinfo!.pscd,
+                                        description: '',
+                                        totalaftdisc: 0,
+                                        transno: datadetail.length == 0
+                                            ? null
+                                            : widget.trnoinfo!.transno,
+                                        totalcost: 0,
+                                        ratecostamt: 0);
+                                setState(() {});
+                              },
+                              child:
+                                  Text(widget.datatransaksi[index].transdesc!)),
+                        );
+                      }),
+                )
+              : Container(),
           Container(
               alignment: Alignment.topCenter,
               height: widget.qty! <= 4
@@ -567,7 +574,8 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                                       totalaftdisc: 0,
                                                       transno: widget
                                                           .trnoinfo!.transno,
-                                                      totalcost: 0, ratecostamt: 0);
+                                                      totalcost: 0,
+                                                      ratecostamt: 0);
                                               await getDetailTrnos()
                                                   .then((value) {
                                                 setState(() {
@@ -586,7 +594,8 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                                         totalaftdisc: 0,
                                                         transno: widget
                                                             .trnoinfo!.transno,
-                                                        totalcost: 0, ratecostamt: 0);
+                                                        totalcost: 0,
+                                                        ratecostamt: 0);
                                               } else {
                                                 ClassRetailMainMobile.of(
                                                         context)!
@@ -782,7 +791,9 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                                                       : widget
                                                                           .trnoinfo!
                                                                           .transno,
-                                                                  totalcost: 0, ratecostamt: 0);
+                                                                  totalcost: 0,
+                                                                  ratecostamt:
+                                                                      0);
                                                             });
                                                             await getDetails!
                                                                 .then((value) {
@@ -813,23 +824,29 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                                               setState(() {});
                                                             });
                                                             await getSumm();
-                                                            ClassRetailMainMobile.of(context)!.string = IafjrndtClass(
-                                                                trdt: widget
-                                                                    .trnoinfo!
-                                                                    .trdt,
-                                                                pscd: widget
-                                                                    .trnoinfo!
-                                                                    .pscd,
-                                                                description: '',
-                                                                totalaftdisc: 0,
-                                                                transno: datadetail
-                                                                            .length ==
-                                                                        0
-                                                                    ? null
-                                                                    : widget
+                                                            ClassRetailMainMobile.of(context)!
+                                                                    .string =
+                                                                IafjrndtClass(
+                                                                    trdt: widget
                                                                         .trnoinfo!
-                                                                        .transno,
-                                                                totalcost: 0, ratecostamt: 0);
+                                                                        .trdt,
+                                                                    pscd: widget
+                                                                        .trnoinfo!
+                                                                        .pscd,
+                                                                    description:
+                                                                        '',
+                                                                    totalaftdisc:
+                                                                        0,
+                                                                    transno: datadetail.length ==
+                                                                            0
+                                                                        ? null
+                                                                        : widget
+                                                                            .trnoinfo!
+                                                                            .transno,
+                                                                    totalcost:
+                                                                        0,
+                                                                    ratecostamt:
+                                                                        0);
                                                           }
                                                         }
                                                       });
@@ -907,7 +924,9 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                                                       : widget
                                                                           .trnoinfo!
                                                                           .transno,
-                                                                  totalcost: 0, ratecostamt: 0);
+                                                                  totalcost: 0,
+                                                                  ratecostamt:
+                                                                      0);
                                                         });
                                                         await getDetails!
                                                             .then((value) {
@@ -955,7 +974,8 @@ class _SlideUpPanelState extends State<SlideUpPanel> {
                                                                     : widget
                                                                         .trnoinfo!
                                                                         .transno,
-                                                                totalcost: 0, ratecostamt: 0);
+                                                                totalcost: 0,
+                                                                ratecostamt: 0);
                                                       }
                                                     }
                                                   },

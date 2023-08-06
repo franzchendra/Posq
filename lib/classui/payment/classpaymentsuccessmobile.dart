@@ -125,8 +125,6 @@ class _ClassPaymetSucsessMobileState extends State<ClassPaymetSucsessMobile> {
     generateDataWA();
     removeDiscount();
     api = ClassApi();
-    handler = DatabaseHandler();
-    handler.initializeDB(databasename);
     // getSummary();
     getListPayament();
     getPaymentList();
@@ -468,7 +466,8 @@ ${payment.reduce((value, element) => value + element)}
                                 //           .toInt(),
                                 //       widget.guestname!);
                                 // }
-                                channel!.sink.add(json.encode({"property": dbname}));
+                                channel!.sink
+                                    .add(json.encode({"property": dbname}));
                                 await getDetailTrnos().then((value) async {
                                   print('ini value : $value');
                                   if (value.isEmpty) {
@@ -557,7 +556,6 @@ ${payment.reduce((value, element) => value + element)}
                                         }
                                       });
                                     } else {
-                                    
                                       await updateTrno();
                                       await ClassApi.cleartable(
                                           dbname, widget.trno);
